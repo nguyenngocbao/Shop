@@ -1,0 +1,75 @@
+﻿<!doctype html>
+<!--[if IE 7]>    <html class="ie7" > <![endif]-->
+<!--[if IE 8]>    <html class="ie8" > <![endif]-->
+<!--[if IE 9]>    <html class="ie9" > <![endif]-->
+<!--[if IE 10]>    <html class="ie10" > <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en-US">
+ <!--<![endif]-->
+<head>
+    <!-- META TAGS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Title -->
+    <title>Max Shop</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700,600,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Quattrocento:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Style Sheet-->
+    <link rel="stylesheet" href="~/Assert/css/tooltipster.css">
+    <link href="~/Assert/css/ie.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="~/Assert/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Assert/css/style.css">
+    <link rel="stylesheet" href="~/Assert/css/responsive.css">
+    <link rel="stylesheet" href="~/Assert/css/prettyPhoto.css">
+
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="images/favicon.jpg">
+
+    <!-- Include the HTML5 shiv print polyfill for Internet Explorer browsers 8 and below -->
+    <!--[if lt IE 10]><script src="js/html5shiv-printshiv.js" media="all"></script><![endif]-->
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header-bar">
+        @Html.Partial("_HeaderBar")
+       
+    </div>
+
+    <div class="header-top">
+        @Html.Partial("_HeaderTop")
+        
+    </div>
+
+    <header>
+        @Html.Action("MenuMain", "Home");
+      
+    </header>
+    <!-- HEADER -->
+
+
+   
+    @RenderBody()
+
+   
+    <!-- FOOTER -->
+    @Html.Partial("Footer")
+   
+    <!-- FOOTER -->
+    <!-- Scripts -->
+    <script src="~/Assert/js/jquery-1.9.1.min.js"></script>
+    <script src="~/Assert/js/jquery-ui.js"></script>
+    <script src="~/Assert/js/jquery.cycle.all.js"></script>
+    <script src="~/Assert/js/modernizr.custom.17475.js"></script>
+    <script src="~/Assert/js/jquery.elastislide.js"></script>
+    <script src="~/Assert/js/jquery.carouFredSel-6.0.4-packed.js"></script>
+    <script src="~/Assert/js/jquery.selectBox.js"></script>
+    <script src="~/Assert/js/jquery.tooltipster.min.js"></script>
+    <script src="~/Assert/js/jquery.prettyPhoto.js"></script>
+    <script src="~/Assert/js/custom.js"></script>
+</body>
+</html>

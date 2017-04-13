@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var listProduct = (List<Model.EF.Product>) ViewBag.Product;
+}
+<div class="wrapper">
+    <div class="container">
+        <div class="row ">
+
+            <!-- SLIDER -->
+            <div class="span9 slider">
+                <div class="slider-slides">
+                    <div class="slides">
+                        <a href="#"><img src="~/Assert/images/shop1.jpg" alt=""></a>
+                        <div class="overlay">
+                            <h1>AWESOME FURNITUR</h1>
+                            <p><span>50%</span> OFF <br /> TRENDY <span>DESIGNS</span> </p>
+                        </div>
+                    </div>
+                    <div class="slides">
+                        <a href="#"><img src="~/Assert/images/shop2.jpg" alt=""></a>
+                        <div class="overlay">
+                            <h1>LATEST FASHION</h1>
+                            <p><span>30%</span> OFF <br /> TRENDY <span>DESIGNS</span> </p>
+                        </div>
+                    </div>
+                    <div class="slides">
+                        <a href="#"><img src="~/Assert/images/shop3.jpg" alt=""></a>
+                        <div class="overlay">
+                            <h1>AWESOME FURNITUR</h1>
+                            <p><span>50%</span> OFF <br /> TRENDY <span>DESIGNS</span> </p>
+                        </div>
+                    </div>
+                    <div class="slides">
+                        <a href="#"><img src="~/Assert/images/shop4.jpg" alt=""></a>
+                        <div class="overlay">
+                            <h1>LATEST FASHION</h1>
+                            <p><span>30%</span> OFF <br /> TRENDY <span>DESIGNS</span> </p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="next"></a>
+                <a href="#" class="prev"></a>
+                <div class="slider-btn"></div>
+            </div>
+            <!-- SLIDER -->
+            <!-- SPECIAL-OFFER -->
+            <div class="span3">
+                <div class="offers">
+                    <figure>
+                        <a href="#"><img src="~/Assert/images/right1.png" alt=""></a>
+                        <div class="overlay">
+                            <h1>SUMMER<span> COLLECTION 35% OFF</span> <small>  - Limited Offer</small></h1>
+                        </div>
+                    </figure>
+                </div>
+
+                <div class="offers">
+                    <figure>
+                        <a href="#"><img src="~/Assert/images/right2.png" alt=""></a>
+                        <div class="overlay">
+                            <h1>SUMMER<span> COLLECTION 35% OFF</span> <small>  - Limited Offer</small></h1>
+                        </div>
+                    </figure>
+                </div>
+            </div>
+            <!-- SPECIAL-OFFER -->
+
+        </div>
+    </div>
+</div>
+<div class="product_wrap">
+    <div class="container">
+        <div class="row heading-wrap">
+            <div class="span12 heading">
+                <h2>Featured Products <span></span></h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in listProduct)
+            {
+                <div class="span3 product">
+
+                    <div>
+                        <figure>
+                            <a href=""><img src="~/Assert/@item.Image" alt=""></a>
+                            <div class="overlay">
+                                <a href="~/Assert/@item.Image" class="zoom prettyPhoto"></a>
+                                <a href="#" class="link"></a>
+                            </div>
+                        </figure>
+                        <div class="detail">
+                            <span>@item.Price</span>
+                            <h4>@item.Name</h4>
+                            <div class="icon">
+                                <a href="#" class="one tooltip" title="Add to wish list"></a>
+                                <a href="#" class="two tooltip " title="Add to cart"></a>
+                                <a href="#" class="three tooltip" title="Add to compare"></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                </div>
+
+            }
+               
+
+
+
+        </div>
+     </div>
+ </div>
+
+
+

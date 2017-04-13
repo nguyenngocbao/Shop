@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var listProduct = (List<Model.EF.Product>)ViewBag.Product;
+}
+
+<!-- BAR -->
+@Html.Action("Bar","Product")
+<div class="product_wrap">
+
+    <div class="container">
+        <div class="row">
+            <div class="span9 product-grid">
+                <div class=" clearfix">
+                    @foreach (var item in listProduct)
+                    {
+                        <div class="span3 product">
+
+                            <div>
+                                <figure>
+                                    <a href="#"><img src="~/Assert/@item.Image" alt=""></a>
+                                    <div class="overlay">
+                                        <a href="~/Assert/@item.Image" class="zoom"></a>
+                                        <a href="#" class="link"></a>
+                                    </div>
+                                </figure>
+                                <div class="detail">
+                                    <span>@item.Price</span>
+                                    <h4>@item.Name</h4>
+                                    <div class="icon">
+                                        <a href="#" class="one tooltip" title="Add to wish list"></a>
+                                        <a href="#" class="two tooltip " title="Add to cart"></a>
+                                        <a href="#" class="three tooltip" title="Add to compare"></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    }
+
+
+                   
+                   
+                   
+                </div>
+
+                <div class="pagination clearfix">
+                    <p>Items 1 to 9 of 12 total</p>
+                    <ul class="clearfix">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">></a></li>
+                    </ul>
+                </div>
+            </div>
+        
+
+            <div class="span3">
+                 @Html.Partial("SlideBar")
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PRODUCT-OFFER -->
+
+
+

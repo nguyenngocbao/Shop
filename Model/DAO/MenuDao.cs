@@ -25,12 +25,12 @@ namespace Model.DAO
         {
             return db.Menus.ToList();
         }
-        public long insert(Menu menu)
+        public void insert(Menu menu)
         {
             
             db.Menus.Add(menu);
             db.SaveChanges();
-            return menu.ID;
+           
 
         }
         

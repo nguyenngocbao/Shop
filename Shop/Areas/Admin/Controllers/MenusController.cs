@@ -36,7 +36,7 @@ namespace Shop.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Text,Link,DisplayOrder,Target,Status")] Menu menu)
+        public ActionResult Create([Bind(Include = "Text,Link,DisplayOrder,Target,Status")] Menu menu)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace Shop.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Text,Link,DisplayOrder,Target,Status")] Menu menu)
+        public ActionResult Edit([Bind(Include = "Text,Link,DisplayOrder,Target,Status")] Menu menu)
         {
             if (ModelState.IsValid)
             {

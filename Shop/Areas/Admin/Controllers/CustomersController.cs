@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Model.EF;
+using Model.DAO;
 
 namespace Shop.Areas.Admin.Controllers
 {
     public class CustomersController : Controller
     {
-        private Shop db = new Shop();
+        private CustomerDao db = new CustomerDao();
 
         // GET: Admin/Customers
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            return View(db.list());
         }
 
         // GET: Admin/Customers/Details/5
@@ -27,7 +28,7 @@ namespace Shop.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.findByID(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -50,8 +51,8 @@ namespace Shop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customer);
-                db.SaveChanges();
+                db.insert(customer);
+            
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +66,7 @@ namespace Shop.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.findByID(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -82,8 +83,7 @@ namespace Shop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
+                db.update(customer);
                 return RedirectToAction("Index");
             }
             return View(customer);
@@ -96,7 +96,7 @@ namespace Shop.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.findByID(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -109,9 +109,9 @@ namespace Shop.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
-            db.SaveChanges();
+            Customer customer = db.findByID(id);
+            db.delete(customer.ID);
+         
             return RedirectToAction("Index");
         }
 
@@ -119,7 +119,7 @@ namespace Shop.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                db.dispose();
             }
             base.Dispose(disposing);
         }

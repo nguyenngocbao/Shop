@@ -5,8 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<div class="page-content-wrapper">
-    <div class="page-content">
+
         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
         <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -121,6 +120,9 @@
 
                                 <tr>
                                     <th>
+                                        @Html.DisplayNameFor(model => model.ID)
+                                    </th>
+                                    <th>
                                         @Html.DisplayNameFor(model => model.Text)
                                     </th>
                                     <th>
@@ -142,6 +144,9 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr class="odd gradeX">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ID)
+                                        </td>
 
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Text)
@@ -174,8 +179,7 @@
         </div>
 
         <!-- END PAGE CONTENT-->
-    </div>
-</div>
+   
 
 
 

@@ -56,11 +56,16 @@
     <Compile Include="DAO\MenuDao.cs" />
     <Compile Include="DAO\ProductDao.cs" />
     <Compile Include="DAO\UserDao.cs" />
+    <Compile Include="EF\Category.cs" />
+    <Compile Include="EF\Customer.cs" />
+    <Compile Include="EF\Menu.cs" />
+    <Compile Include="EF\Model1.cs" />
+    <Compile Include="EF\OrderDetail.cs" />
+    <Compile Include="EF\Product.cs" />
+    <Compile Include="EF\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EF\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

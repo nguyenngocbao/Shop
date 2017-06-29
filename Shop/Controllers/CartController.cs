@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Shop.Models;
+using Model.DAO;
+using Model.EF;
 
 using System.Web.Script.Serialization;
 
@@ -113,6 +115,43 @@ namespace Shop.Controllers
 
           return  RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult Payment(string shipName, string mobile, string address, string email)
+        {
+            var order = new Order();
+            order.CreatedDate = DateTime.Now;
+            order.ShipAddress = address;
+            order.ShipMobile = mobile;
+            order.ShipName = shipName;
+            order.ShipEmail = email;
+
+            try
+            {
+                var id = new OrderDao().Insert(order);
+                var cart = (List<CartItem>)Session[CartSession];
+                var detailDao = new Model.Dao.OrderDetailDao();
+                decimal total = 0;
+                foreach (var item in cart)
+                {
+                    var orderDetail = new OrderDetail();
+                    orderDetail.ProductID = item.Product.ID;
+                    orderDetail.OrderID = id;
+                    orderDetail.Price = item.Product.Price;
+                    orderDetail.Quantity = item.Quantity;
+                    detailDao.Insert(orderDetail);
+
+                    total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                //ghi log
+                return Redirect("/loi-thanh-toan");
+            }
+            return Redirect("/hoan-thanh");
+        }
+
 
 
 

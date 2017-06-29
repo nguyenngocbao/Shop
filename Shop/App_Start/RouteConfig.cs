@@ -13,6 +13,8 @@ namespace Shop
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes();
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
@@ -20,7 +22,7 @@ namespace Shop
             );
             routes.MapRoute(
           name: "Add Cart",
-          url: "themgiohang",
+          url: "them-gio-hang",
           defaults: new { controller = "Cart", action = "AddItem", id = UrlParameter.Optional },
           namespaces: new[] { "Shop.Controllers" }
       );

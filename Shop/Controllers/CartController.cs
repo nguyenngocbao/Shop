@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Shop.Models;
-using Model.DAO;
+
 using Model.EF;
 
 using System.Web.Script.Serialization;
@@ -25,7 +25,7 @@ namespace Shop.Controllers
             var list = new Cart();
             if (cart != null)
             {
-                list = (Cart) cart;
+                list = (Cart)cart;
             }
             return View(list);
 
@@ -69,7 +69,7 @@ namespace Shop.Controllers
                 item.Product = product;
                 item.Quantity = quantity;
                 var list = new List<CartItem>();
-                
+
                 list.Add(item);
                 //Gán vào session
                 var ca = new Cart();
@@ -82,7 +82,7 @@ namespace Shop.Controllers
         {
             var jsonCart = new JavaScriptSerializer().Deserialize<List<CartItem>>(cartModel);
             var ca = (Cart)Session[CartSession];
-            
+
 
             var sessionCart = (List<Models.CartItem>)ca.list;
 
@@ -113,42 +113,40 @@ namespace Shop.Controllers
             ca.list = sessionCart;
             Session[CartSession] = ca;
 
-          return  RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
-        [HttpPost]
-        public ActionResult Payment(string shipName, string mobile, string address, string email)
+
+        public ActionResult Payment()
         {
             var order = new Order();
             order.CreatedDate = DateTime.Now;
-            order.ShipAddress = address;
-            order.ShipMobile = mobile;
-            order.ShipName = shipName;
-            order.ShipEmail = email;
+            order.CustomerID = 1;
+            order.Status = true;
 
-            try
-            {
-                var id = new OrderDao().Insert(order);
-                var cart = (List<CartItem>)Session[CartSession];
-                var detailDao = new Model.Dao.OrderDetailDao();
-                decimal total = 0;
-                foreach (var item in cart)
-                {
-                    var orderDetail = new OrderDetail();
-                    orderDetail.ProductID = item.Product.ID;
-                    orderDetail.OrderID = id;
-                    orderDetail.Price = item.Product.Price;
-                    orderDetail.Quantity = item.Quantity;
-                    detailDao.Insert(orderDetail);
 
-                    total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);
-                }
-                
-            }
-            catch (Exception ex)
+            var id = new OrderDao().Insert(order);
+            var ca = (Cart)Session[CartSession];
+
+
+            var cart = (List<Models.CartItem>)ca.list;
+
+
+            var detailDao = new OrderDetailDao();
+
+            foreach (var item in cart)
             {
-                //ghi log
-                return Redirect("/loi-thanh-toan");
+                var orderDetail = new OrderDetail();
+                orderDetail.ProductID = item.Product.ID;
+                orderDetail.OrderID = id;
+                orderDetail.Price = item.Product.Price;
+                orderDetail.Quantity = item.Quantity;
+                detailDao.Insert(orderDetail);
+
+
             }
+
+
+
             return Redirect("/hoan-thanh");
         }
 

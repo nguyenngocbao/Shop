@@ -54,14 +54,17 @@
     <Compile Include="DAO\CategoryDao.cs" />
     <Compile Include="DAO\CustomerDao.cs" />
     <Compile Include="DAO\MenuDao.cs" />
+    <Compile Include="DAO\OrderDao.cs" />
+    <Compile Include="DAO\OrderDetailDao.cs" />
     <Compile Include="DAO\ProductDao.cs" />
     <Compile Include="DAO\UserDao.cs" />
     <Compile Include="EF\Category.cs" />
     <Compile Include="EF\Customer.cs" />
     <Compile Include="EF\Menu.cs" />
-    <Compile Include="EF\Model1.cs" />
+    <Compile Include="EF\Order.cs" />
     <Compile Include="EF\OrderDetail.cs" />
     <Compile Include="EF\Product.cs" />
+    <Compile Include="EF\Shop.cs" />
     <Compile Include="EF\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

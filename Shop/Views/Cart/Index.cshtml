@@ -53,18 +53,22 @@
                 </div>
             </div>
         </div>
-
+       
         <div class="row cart-calculator clearfix">
             <div class="span8">
                 <h6>Thông tin giao hàng</h6>
                 <div class="estimate clearfix">
-                    <form>
-                        <input type="text" placeholder="Địa Chỉ">
-                        
+                    @using (Html.BeginForm("PayMent", "Cart"))
+                    {
+                        <input name="" type="text" placeholder="Tên">
+                        <input name="" type="text" placeholder="Email">
+                        <input name =""type="text" placeholder="Địa Chỉ">
+
 
                         <input type="text" placeholder="Số điện thoại">
-                        
-                    </form>
+                        <input type="submit" class="red-button" value="Đặt Hàng"> 
+
+                    }
                 </div>
             </div>
 
@@ -79,9 +83,11 @@
                     <li>@Model.TongDonHang()</li>
                     <li>@Model.TongDonHang()</li>
                 </ul>
-                <a href="#" class="red-button">     Đặt hàng</a>
+               
             </div>
+        
         </div>
+        
 
     </div>
 </div>

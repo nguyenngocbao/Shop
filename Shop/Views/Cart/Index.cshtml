@@ -1,7 +1,8 @@
-﻿
+﻿@model Shop.Models.Cart
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    
 
 }
 
@@ -14,80 +15,71 @@
                 <div class="shopping-cart">
 
                     <ul class="title clearfix">
-                        <li>Image</li>
-                        <li class="second">Product Name</li>
-                        <li>Quantity</li>
-                        <li>Unite Price</li>
-                        <li>Sub Total</li>
+                        <li>Hình Ảnh</li>
+                        <li class="second">Tên Sản Phẩm</li>
+                        <li>Số lượng</li>
+                        <li>Giá</li>
+                        <li>Tổng Giá</li>
+                        
                         <li class="last">Action</li>
                     </ul>
 
-                    <ul class=" clearfix">
-                        <li>
-                            <figure><img src="http://placehold.it/131x86" alt=""></figure>
-                        </li>
-                        <li class="second">
-                            <h4>Brown Wood Chair</h4>
-                            <p><span>Color:</span> Brown</p>
-                            <p><span>Size:</span> 12</p>
-                        </li>
-                        <li>
-                            <input type="number" value="1">
-                        </li>
-                        <li>$255.00</li>
-                        <li>$255.00</li>
-                        <li class="last"><a href="#">X</a></li>
-                    </ul>
+                    @foreach (var item in Model.list)
+                    {
 
-                   
 
-                    <a href="#" class="red-button">Continue Shopping</a>
-                    <a href="#" class="red-button black">Update Shopping Cart</a>
+                        <ul >
+                            <li>
+                                <figure><img src="~/Assert/@item.Product.Image" alt="" width="50%"></figure>
+                            </li>
+                            <li class="second">
+                                <h4>@item.Product.Name</h4>
+                                
+                            </li>
+                            <li>
+                                <input type="number" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity">
+                            </li>
+                            <li>@item.Product.Price</li>
+                            <li>@item.tong()</li>
+                            <li> <a style="margin-top = 20px" class="btn btn-danger" href="@Url.Action("Delete","Cart",new { id = item.Product.ID})" id="btn-delete" data-id="@item.Product.ID">Xóa</a></li>
+                        </ul>
+                    }
+
+
+
+                    <a href="#" class="red-button">Tiếp tục mua sắm</a>
+                    <a href="#" id="btnUpdate" class="red-button black">Cập nhật hóa đơn</a>
 
                 </div>
             </div>
         </div>
 
         <div class="row cart-calculator clearfix">
-            <div class="span4">
-                <h6>Estimate Shipping & Taxes</h6>
+            <div class="span8">
+                <h6>Thông tin giao hàng</h6>
                 <div class="estimate clearfix">
                     <form>
-                        <select>
-                            <option>-- Select Your Country --</option>
-                            <option>Pakistan</option>
-                        </select>
+                        <input type="text" placeholder="Địa Chỉ">
+                        
 
-                        <select>
-                            <option>-- Select Your Region --</option>
-                        </select>
-
-                        <input type="text" placeholder="Your Postcode">
-                        <input type="submit" class="red-button" value="Get Quotes">
+                        <input type="text" placeholder="Số điện thoại">
+                        
                     </form>
                 </div>
             </div>
 
-            <div class="span4">
-                <h6>Discount Codes</h6>
-                <div class="estimate clearfix">
-                    <form>
-                        <input type="text" placeholder="Your Postcode">
-                        <input type="submit" class="red-button" value="Get Quotes">
-                    </form>
-                </div>
-            </div>
+            
 
             <div class="span4 total clearfix">
                 <ul class="black">
-                    <li>Subtotal:</li>
+                    <li>Tổng tiền</li>
                     <li>Grand total:</li>
                 </ul>
                 <ul class="gray">
-                    <li>$1475</li>
-                    <li>$1475.00</li>
+                    <li>@Model.TongDonHang()</li>
+                    <li>@Model.TongDonHang()</li>
                 </ul>
-                <a href="#" class="red-button">Proceed to Checkout</a>
+                <a href="#" class="red-button">     Đặt hàng</a>
             </div>
         </div>
 

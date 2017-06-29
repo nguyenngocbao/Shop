@@ -147,10 +147,7 @@ $(document).ready(function(e) {
     });
 
 
-    $(".shopping-cart li a").click(function(e){
-        e.preventDefault();
-        $(this).parents('ul').stop(true,true).fadeOut(100);
-    });
+   
 
 
     $('#carousel').carouFredSel({

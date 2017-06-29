@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Shop.Models;
 
+using System.Web.Script.Serialization;
 
 namespace Shop.Controllers
 {
@@ -17,7 +18,15 @@ namespace Shop.Controllers
         // GET: Cart
         public ActionResult Index()
         {
-            return View();
+
+            var cart = Session[CartSession];
+            var list = new Cart();
+            if (cart != null)
+            {
+                list = (Cart) cart;
+            }
+            return View(list);
+
         }
         public ActionResult AddItem(long productId, int quantity)
         {
@@ -25,7 +34,8 @@ namespace Shop.Controllers
             var cart = Session[CartSession];
             if (cart != null)
             {
-                var list = (List<Models.CartItem>)cart;
+                var ca = (Cart)cart;
+                var list = (List<Models.CartItem>)ca.list;
                 if (list.Exists(x => x.Product.ID == productId))
                 {
 
@@ -46,7 +56,9 @@ namespace Shop.Controllers
                     list.Add(item);
                 }
                 //Gán vào session
-                Session[CartSession] = list;
+
+                ca.list = list;
+                Session[CartSession] = ca;
             }
             else
             {
@@ -55,12 +67,54 @@ namespace Shop.Controllers
                 item.Product = product;
                 item.Quantity = quantity;
                 var list = new List<CartItem>();
+                
                 list.Add(item);
                 //Gán vào session
-                Session[CartSession] = list;
+                var ca = new Cart();
+                ca.list = list;
+                Session[CartSession] = ca;
             }
             return RedirectToAction("Index");
         }
-        
+        public JsonResult Update(string cartModel)
+        {
+            var jsonCart = new JavaScriptSerializer().Deserialize<List<CartItem>>(cartModel);
+            var ca = (Cart)Session[CartSession];
+            
+
+            var sessionCart = (List<Models.CartItem>)ca.list;
+
+            foreach (var item in sessionCart)
+            {
+                var jsonItem = jsonCart.SingleOrDefault(x => x.Product.ID == item.Product.ID);
+                if (jsonItem != null)
+                {
+                    item.Quantity = jsonItem.Quantity;
+                }
+            }
+            ca.list = sessionCart;
+            Session[CartSession] = ca;
+            return Json(new
+            {
+                status = true
+            });
+        }
+
+
+        public ActionResult Delete(long id)
+        {
+            var ca = (Cart)Session[CartSession];
+
+
+            var sessionCart = (List<Models.CartItem>)ca.list;
+            sessionCart.RemoveAll(x => x.Product.ID == id);
+            ca.list = sessionCart;
+            Session[CartSession] = ca;
+
+          return  RedirectToAction("Index");
+        }
+
+
+
     }
 }

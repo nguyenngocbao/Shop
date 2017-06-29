@@ -11,5 +11,9 @@ namespace Shop.Models
     {
         public Product Product { set; get; }
         public int Quantity { set; get; }
+        public decimal? tong()
+        {
+           return Product.Price* Quantity;
+        }
     }
 }

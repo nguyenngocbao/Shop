@@ -16,8 +16,23 @@ namespace Shop
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },namespaces : new[] { "Shop.Controllers" }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }, namespaces: new[] { "Shop.Controllers" }
             );
+            routes.MapRoute(
+          name: "Add Cart",
+          url: "themgiohang",
+          defaults: new { controller = "Cart", action = "AddItem", id = UrlParameter.Optional },
+          namespaces: new[] { "Shop.Controllers" }
+      );
+            routes.MapRoute(
+                name: "Product", url: "test-1",
+                 defaults: new { controller = "Home", action = "Index" },
+          namespaces: new[] { "Shop.Controllers" }
+
+
+                );
+
+
         }
     }
 }

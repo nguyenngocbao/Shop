@@ -9,17 +9,17 @@ using System.Web.Mvc;
 using Model.EF;
 using Model.DAO;
 
+
 namespace Shop.Areas.Admin.Controllers
 {
     public class ProductsController : Controller
     {
-        private ProductDao pro = new ProductDao();
-        
+        private ProductDao db = new ProductDao();
 
         // GET: Admin/Products
         public ActionResult Index()
         {
-            return View(pro.list());
+            return View(db.list());
         }
 
         // GET: Admin/Products/Details/5
@@ -29,7 +29,7 @@ namespace Shop.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = pro.findByID(id);
+            Product product = db.findByID(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -48,11 +48,20 @@ namespace Shop.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Code,MetaTitle,Description,Image,Price,Quantity,CategoriesID,Detail,Warranty,TopHot,ViewCount")] Product product)
+        public ActionResult Create([Bind(Include = "Name,Code,MetaTitle,Description,Image,Price,Quantity,CategoriesID,Detail,Warranty,TopHot,ViewCount")] Product product)
         {
-            if (ModelState.IsValid)
+            var f = Request.Files["Image"];
+            if (f != null && f.ContentLength > 0)
             {
-                pro.insert(product);
+                product.Image = f.FileName;
+                //     + f.FileName.Substring(f.FileName.LastIndexOf("."));
+                f.SaveAs(Server.MapPath("~/Assert/" + product.Image));
+            }
+
+
+                if (ModelState.IsValid)
+            {
+                db.insert(product);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +75,7 @@ namespace Shop.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = pro.findByID(id);
+            Product product = db.findByID(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -83,7 +92,7 @@ namespace Shop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                pro.update(product);
+                db.update(product);
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -96,7 +105,7 @@ namespace Shop.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = pro.findByID(id);
+            Product product = db.findByID(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -109,7 +118,7 @@ namespace Shop.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            pro.delete(id);
+            db.delete(id);
             return RedirectToAction("Index");
         }
 
@@ -117,7 +126,7 @@ namespace Shop.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                pro.disponse();
+                db.disponse();
             }
             base.Dispose(disposing);
         }

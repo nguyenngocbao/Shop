@@ -60,5 +60,9 @@ namespace Model.DAO
         {
             db.Dispose();
         }
+        public Product ViewDetail(long id)
+        {
+            return db.Products.Find(id);
+        }
     }
 }

@@ -11,107 +11,106 @@ using Model.DAO;
 
 namespace Shop.Areas.Admin.Controllers
 {
-    public class CustomersController : Controller
+    public class UsersController : Controller
     {
-        private CustomerDao db = new CustomerDao();
+        private UserDao db = new UserDao();
 
-        // GET: Admin/Customers
+        // GET: Admin/Users
         public ActionResult Index()
         {
             return View(db.list());
         }
 
-        // GET: Admin/Customers/Details/5
+        // GET: Admin/Users/Details/5
         public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.findByID(id);
-            if (customer == null)
+            User user = db.findByID(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(user);
         }
 
-        // GET: Admin/Customers/Create
+        // GET: Admin/Users/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Customers/Create
+        // POST: Admin/Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Username,Password,Name,Email,Phone,Address,Status")] Customer customer)
+        public ActionResult Create([Bind(Include = "UserName,Password,Name,Email,Phone,Status")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.insert(customer);
-            
+                db.insert(user);
                 return RedirectToAction("Index");
             }
 
-            return View(customer);
+
+
+            return View(user);
         }
 
-        // GET: Admin/Customers/Edit/5
+        // GET: Admin/Users/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.findByID(id);
-            if (customer == null)
+            User user = db.findByID(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(user);
         }
 
-        // POST: Admin/Customers/Edit/5
+        // POST: Admin/Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Username,Password,Name,Email,Phone,Address,Status")] Customer customer)
+        public ActionResult Edit([Bind(Include = "ID,UserName,Password,Name,Email,Phone,Status")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.update(customer);
+                db.update(user);
                 return RedirectToAction("Index");
             }
-            return View(customer);
+            return View(user);
         }
 
-        // GET: Admin/Customers/Delete/5
+        // GET: Admin/Users/Delete/5
         public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.findByID(id);
-            if (customer == null)
+            User user = db.findByID(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(user);
         }
 
-        // POST: Admin/Customers/Delete/5
+        // POST: Admin/Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Customer customer = db.findByID(id);
-            db.delete(customer.ID);
-         
+            db.delete(id);
             return RedirectToAction("Index");
         }
 

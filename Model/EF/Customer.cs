@@ -9,7 +9,6 @@ namespace Model.EF
     [Table("Customer")]
     public partial class Customer
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long ID { get; set; }
 
         [StringLength(50)]

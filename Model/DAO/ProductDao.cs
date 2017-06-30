@@ -26,11 +26,11 @@ namespace Model.DAO
         }
         public List<Product> list(long id,int page)
         {
-            int size = (page - 1)*4 + 1;
+            int size = (page - 1)*8 + 1;
             var name = from table in db.Products
                        where table.CategoriesID == id orderby table.ID
                        select table;
-            return name.Skip(size).Take(4).ToList();
+            return name.Skip(size).Take(8).ToList();
         }
 
 

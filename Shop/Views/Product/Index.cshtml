@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
     var listProduct = (List<Model.EF.Product>)ViewBag.Product;
     var re = (List<Model.EF.Product>)ViewBag.ProductRe;
-    int countPage = (listProduct.Count / 4)+2;
+    int countPage = (listProduct.Count / 8)+2;
 
 }
 
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="pagination clearfix">
-                    <p>Sản phẩm từ 1 đến 4 trong @listProduct.Count</p>
+                    
                    
                     <ul class="clearfix">
                         @for (var i = 1; i < countPage; i++)

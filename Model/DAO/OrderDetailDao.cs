@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model.DAO
 {
-  public  class OrderDetailDao
+    public class OrderDetailDao 
     {
         Shop db = null;
         public OrderDetailDao()
@@ -28,5 +28,6 @@ namespace Model.DAO
 
             }
         }
-    }
+    } 
+    
 }

@@ -14,7 +14,7 @@ namespace Shop.Controllers
 
         {
             var product = new ProductDao();
-            ViewBag.Product = product.listTopHot(3);
+            ViewBag.Product = product.listTopHot(8);
 
            
             return View();

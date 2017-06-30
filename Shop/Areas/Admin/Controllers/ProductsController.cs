@@ -19,6 +19,8 @@ namespace Shop.Areas.Admin.Controllers
         // GET: Admin/Products
         public ActionResult Index()
         {
+            var product = new MenuDao();
+            ViewBag.listMenu = product;
             return View(db.list());
         }
 
@@ -39,7 +41,10 @@ namespace Shop.Areas.Admin.Controllers
 
         // GET: Admin/Products/Create
         public ActionResult Create()
+
         {
+            var product = new MenuDao();
+            ViewBag.listMenu = product.list();
             return View();
         }
 
@@ -48,7 +53,7 @@ namespace Shop.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,Code,MetaTitle,Description,Image,Price,Quantity,CategoriesID,Detail,Warranty,TopHot,ViewCount")] Product product)
+        public ActionResult Create([Bind(Include = "Name,Image,Price,CategoriesID,InsertDate")] Product product)
         {
             var f = Request.Files["Image"];
             if (f != null && f.ContentLength > 0)
@@ -71,6 +76,8 @@ namespace Shop.Areas.Admin.Controllers
         // GET: Admin/Products/Edit/5
         public ActionResult Edit(long? id)
         {
+            var pr = new MenuDao();
+            ViewBag.listMenu = pr.list();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -88,8 +95,15 @@ namespace Shop.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Code,MetaTitle,Description,Image,Price,Quantity,CategoriesID,Detail,Warranty,TopHot,ViewCount")] Product product)
+        public ActionResult Edit([Bind(Include = "ID,Name,Image,Price,CategoriesID,InsertDate")] Product product)
         {
+            var f = Request.Files["Image"];
+            if (f != null && f.ContentLength > 0)
+            {
+                product.Image = f.FileName;
+                //     + f.FileName.Substring(f.FileName.LastIndexOf("."));
+                f.SaveAs(Server.MapPath("~/Assert/" + product.Image));
+            }
             if (ModelState.IsValid)
             {
                 db.update(product);

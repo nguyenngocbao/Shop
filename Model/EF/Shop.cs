@@ -50,13 +50,7 @@
                 .Property(e => e.Price)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<Product>()
-                .Property(e => e.Code)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Product>()
-                .Property(e => e.MetaTitle)
-                .IsUnicode(false);
+           
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.Price)

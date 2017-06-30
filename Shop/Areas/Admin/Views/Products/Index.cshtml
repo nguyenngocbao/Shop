@@ -3,68 +3,20 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var menuDao = (Model.DAO.MenuDao)ViewBag.listMenu;
 }
 
 
 
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-<div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                Widget settings form goes here
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn blue">Save changes</button>
-                <button type="button" class="btn default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-<!-- BEGIN PAGE HEADER-->
-<!-- BEGIN PAGE HEAD -->
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <div class="page-title">
-        <h1>Managed Datatables <small>managed datatable samples</small></h1>
-    </div>
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD -->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-    <li>
-        <a href="index.html">Home</a>
-        <i class="fa fa-circle"></i>
-    </li>
-    <li>
-        <a href="#">Data Tables</a>
-        <i class="fa fa-circle"></i>
-    </li>
-    <li>
-        <a href="#">Managed Datatables</a>
-    </li>
-</ul>
-<!-- END PAGE BREADCRUMB -->
-<!-- END PAGE HEADER-->
-<!-- BEGIN PAGE CONTENT-->
+
 <div class="row">
     <div class="col-md-12">
         <!-- BEGIN EXAMPLE TABLE PORTLET-->
         <div class="portlet box grey-cascade">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-globe"></i>Managed Table
+                    <i class="fa fa-globe"></i>Quản lý sản phẩm
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -120,43 +72,26 @@
 
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Name)
+                                Tên sản phẩm
+                            </th>
+                          
+                            <th>
+                               Hình ảnh
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Code)
+                               Giá
                             </th>
+                           
                             <th>
-                                @Html.DisplayNameFor(model => model.MetaTitle)
+                               Danh mục
                             </th>
+                           
                             <th>
-                                @Html.DisplayNameFor(model => model.Description)
+                               Ngày thêm
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Image)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Price)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Quantity)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CategoriesID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Detail)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Warranty)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TopHot)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ViewCount)
-                            </th>
+                          
                             <th></th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -166,44 +101,30 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
+                               
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Code)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MetaTitle)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                   <img  src="~/Assert/@item.Image">
-                                  
+                                    <img src="~/Assert/@item.Image" class="imgProduct">
+
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Price)
                                 </td>
+                               
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                    @menuDao.findByID(item.CategoriesID).Text
+                                   
                                 </td>
+                              
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.CategoriesID)
+                                    @Html.DisplayFor(modelItem => item.InsertDate)
                                 </td>
+                               
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Detail)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Warranty)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TopHot)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ViewCount)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    <a href="@Url.Action("Edit","Products",new { id = item.ID })" class="btn btn-info">Sửa</a>
+                                    <a href="@Url.Action("Delete","Products",new { id = item.ID })" class="btn btn-danger">Xóa</a>
+                                   
+                                   
+                                  
                                 </td>
 
                             </tr>
@@ -220,4 +141,3 @@
 </div>
 
 <!-- END PAGE CONTENT-->
-

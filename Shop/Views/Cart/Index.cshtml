@@ -58,14 +58,14 @@
             <div class="span8">
                 <h6>Thông tin giao hàng</h6>
                 <div class="estimate clearfix">
-                    @using (Html.BeginForm("PayMent", "Cart"))
+                    @using (Html.BeginForm("Payment", "Cart"))
                     {
-                        <input name="" type="text" placeholder="Tên">
-                        <input name="" type="text" placeholder="Email">
-                        <input name =""type="text" placeholder="Địa Chỉ">
+                        <input name="Name" type="text" placeholder="Tên" required>
+                        <input name="Email" type="text" placeholder="Email" required>
+                        <input name ="Address"type="text" placeholder="Địa Chỉ" required>
 
 
-                        <input type="text" placeholder="Số điện thoại">
+                        <input type="text" name="Phone" placeholder="Số điện thoại" required>
                         <input type="submit" class="red-button" value="Đặt Hàng"> 
 
                     }

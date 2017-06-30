@@ -116,11 +116,15 @@ namespace Shop.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Payment()
+        public ActionResult Payment(String Name,String Email,String Address,String Phone)
         {
             var order = new Order();
             order.CreatedDate = DateTime.Now;
-            order.CustomerID = 1;
+            order.Name = Name;
+            order.Email = Email;
+            order.Address = Address;
+            order.Phone = Phone;
+           
             order.Status = true;
 
 
@@ -145,9 +149,9 @@ namespace Shop.Controllers
 
             }
 
+            Session[CartSession] = null;
 
-
-            return Redirect("/hoan-thanh");
+            return Redirect("../Home");
         }
 
 

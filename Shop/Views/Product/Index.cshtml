@@ -3,6 +3,9 @@
     ViewBag.Title = "Product";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
     var listProduct = (List<Model.EF.Product>)ViewBag.Product;
+    var re = (List<Model.EF.Product>)ViewBag.ProductRe;
+    int countPage = (listProduct.Count / 4)+2;
+
 }
 
 <!-- BAR -->
@@ -11,9 +14,9 @@
 
     <div class="container">
         <div class="row">
-            <div class="span9 product-grid">
+            <div class="span12">
                 <div class=" clearfix">
-                    @foreach (var item in listProduct)
+                    @foreach (var item in re)
                     {
                         <div class="span3 product">
 
@@ -47,21 +50,22 @@
                 </div>
 
                 <div class="pagination clearfix">
-                    <p>Items 1 to 9 of 12 total</p>
+                    <p>Sản phẩm từ 1 đến 4 trong @listProduct.Count</p>
+                   
                     <ul class="clearfix">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">></a></li>
+                        @for (var i = 1; i < countPage; i++)
+                        {
+                            if (i <= listProduct.Count)
+                            {
+                        <li><a href="@Url.Action("Index", "Product", new { id = listProduct.ElementAt(1).CategoriesID, page = i })">@i</a></li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>
         
 
-            <div class="span3">
-                 @Html.Partial("SlideBar")
-            </div>
+            
         </div>
     </div>
 </div>

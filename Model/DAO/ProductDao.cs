@@ -22,12 +22,29 @@ namespace Model.DAO
         }
         public List<Product> listTopHot(int top)
         {
-            return db.Products.OrderByDescending(x => x.TopHot).Take(top).ToList();
+            return db.Products.OrderByDescending(x => x.InsertDate).Take(top).ToList();
         }
+        public List<Product> list(long id,int page)
+        {
+            int size = (page - 1)*4 + 1;
+            var name = from table in db.Products
+                       where table.CategoriesID == id orderby table.ID
+                       select table;
+            return name.Skip(size).Take(4).ToList();
+        }
+
 
         public List<Product> list()
         {
             return db.Products.ToList();
+        }
+        public List<Product> list(long id) { 
+             var name = from table in db.Products
+                        where table.CategoriesID == id
+                        select table;
+            return name.ToList();
+        
+           
         }
 
         public Product findByID(long? id)

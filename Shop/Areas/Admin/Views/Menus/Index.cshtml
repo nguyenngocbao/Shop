@@ -7,63 +7,15 @@
 
 
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-<div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                Widget settings form goes here
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn blue">Save changes</button>
-                <button type="button" class="btn default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-<!-- BEGIN PAGE HEADER-->
-<!-- BEGIN PAGE HEAD -->
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <div class="page-title">
-        <h1>Managed Datatables <small>managed datatable samples</small></h1>
-    </div>
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD -->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-    <li>
-        <a href="index.html">Home</a>
-        <i class="fa fa-circle"></i>
-    </li>
-    <li>
-        <a href="#">Data Tables</a>
-        <i class="fa fa-circle"></i>
-    </li>
-    <li>
-        <a href="#">Managed Datatables</a>
-    </li>
-</ul>
-<!-- END PAGE BREADCRUMB -->
-<!-- END PAGE HEADER-->
-<!-- BEGIN PAGE CONTENT-->
+
+   
 <div class="row">
     <div class="col-md-12">
         <!-- BEGIN EXAMPLE TABLE PORTLET-->
         <div class="portlet box grey-cascade">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-globe"></i>Managed Table
+                    <i class="fa fa-globe"></i>Quản lý Menu
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -118,23 +70,19 @@
                     <thead>
 
                         <tr>
+                           
                             <th>
-                                @Html.DisplayNameFor(model => model.ID)
+                                Tên 
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Text)
+                               Đường dẫn
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Link)
+                               Thứ tự 
                             </th>
+                            
                             <th>
-                                @Html.DisplayNameFor(model => model.DisplayOrder)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Target)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Status)
+                               Trạng thái
 
                             </th>
                             <th>
@@ -147,9 +95,7 @@
                         @foreach (var item in Model)
                         {
                             <tr class="odd gradeX">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ID)
-                                </td>
+                               
 
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Text)
@@ -160,17 +106,14 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.DisplayOrder)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Target)
-                                </td>
+                               
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Status)
 
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    <a href="@Url.Action("Edit","Menus",new { id = item.ID })" class="btn btn-info">Sửa</a>
+                                    <a href="@Url.Action("Delete","Menus",new { id = item.ID })" class="btn btn-danger">Xóa</a>
 
                                 </td>
 

@@ -786,7 +786,7 @@ Page container
   clear: both;
 }
 .page-header-fixed .page-container {
-  margin-top: 75px;
+  margin-top: 1spx;
 }
 .page-footer-fixed.page-footer-fixed-mobile .page-container {
   margin-bottom: 20px !important;
